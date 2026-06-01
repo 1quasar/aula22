@@ -40,9 +40,32 @@ class FilmeController {
         $filmes = Filme::buscarTodos();
 
         header("Content-Type: application/json");
+
+        if(empty($filmes)) {
+            // Status 404 para indicar que o recurso solicitado não foi encontrado
+            http_response_code(404);
+            echo json_encode(["mensagem" => "Nenhum filme cadastrado no sistema."]);
+            exit;
+        }
+
         http_response_code(200);
         echo json_encode($filmes);
     }
 
+    public function excluir(){
+        // Captura o ID diretamente dos parametros de URL (GET)
+        $id = $_GET['id'] ?? null;
 
+        if (!empty($id)){
+            Filme::deletar($id);
+        }
+
+        // Redireciona o usuário de volta para a listagem atualizada
+        header("Location: /filmes");
+        exit;
+    }
+
+    public function detalharApi(){
+        
+    }
 }

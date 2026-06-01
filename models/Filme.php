@@ -13,7 +13,7 @@ class Filme {
     }
 
 
-    // Método para inserir (CREATE)
+    // Método para inserir um novo filme (CREATE)
     public static function salvar($titulo, $genero, $ano) {
         $pdo = Database::getConnection();
 
@@ -28,5 +28,24 @@ class Filme {
         $stmt->bindValue(':ano', $ano);
 
         return $stmt->execute(); // Retorna true se deu certo
+    }
+
+    // Método para remover um filme selecionado 
+    public static function deletar($id) {
+        $pdo = Database::getConnection();
+
+        $sql = "DELETE FROM filmes WHERE id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        
+        return $stmt->execute();
+    }
+
+    public static function buscarPorId($id) {
+        $pdo = Database::getConnetion();
+
+        $stmt = $pdo->query("SELECT * FROM filmes WHERE id = :id");
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

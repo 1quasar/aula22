@@ -20,6 +20,7 @@
                     <th>Título</th>
                     <th>Gênero</th>
                     <th>Ano</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,9 @@
                         <td><?= htmlspecialchars($filme['titulo']) ?></td>
                         <td><?= htmlspecialchars($filme['genero']) ?></td>
                         <td><?= $filme['ano'] ?></td>
+                        <td>
+                            <a href="/filmes/excluir?id=<?= $filme['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Deseja realmente excluir este filme?');">Excluir</a>
+                        </td>
                     </tr>
                     
                 <?php endforeach; ?>

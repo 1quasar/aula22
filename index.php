@@ -29,6 +29,10 @@ switch ($url) {
         $controller->listarApi();
         break;
 
+    case '/filmes/excluir':
+        $controller->excluir();
+        break;
+
     default:
         http_response_code(404);
         echo "<h1>404 - Página não encontrada</h1>";
